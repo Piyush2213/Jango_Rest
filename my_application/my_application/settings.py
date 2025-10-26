@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -76,17 +77,19 @@ WSGI_APPLICATION = 'my_application.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'employee_db',      # the database you created
-        'USER': 'root',             # your MySQL username
-        'PASSWORD': '123', # your MySQL password
-        'HOST': '127.0.0.1',        # or 'localhost'
-        'PORT': '3306',             # default MySQL port
-       
+        'NAME': os.environ.get('DB_NAME', 'employee_db'),
+        'USER': os.environ.get('DB_USER', 'root'),
+        'PASSWORD': os.environ.get('DB_PASSWORD', '123'),
+        'HOST': os.environ.get('DB_HOST', 'db'),
+        'PORT': '3306',
     }
 }
+
 
 
 
